@@ -20,7 +20,7 @@ const routes = [
     method: "DELETE",
     path: "/products/:id",
     handler: (request, response) => {
-      return response.end("Item removido com sucesso!");
+      return response.end("Produto ID: " + request.params.id);
     }
   }
 ].map((route) => ({

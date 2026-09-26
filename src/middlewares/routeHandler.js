@@ -12,6 +12,17 @@ function routeHandler(request, response) {
   // console.log(route);
 
   if (route) {
+    const routeParams = request.url.match(route.path);
+    // console.log(`routeParam: ${routeParam}`);
+    // console.log(routeParam);
+    console.log(routeParams.groups);
+
+    // cria um novo objeto
+    const { ...params } = routeParams.groups;
+
+    console.log(params);
+    // Cria um parametro pq js é assim ¯\_(^ - ^)_/¯
+    request.params = params;
     return route.handler(request, response);
   }
 
