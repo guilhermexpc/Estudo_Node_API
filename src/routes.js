@@ -1,3 +1,5 @@
+import { parseRoutePath } from "./utils/parseRoutePath.js";
+
 const routes = [
   {
     method: "GET",
@@ -13,7 +15,17 @@ const routes = [
       console.log(request.body);
       return response.writeHead(201).end(JSON.stringify(request.body));
     }
+  },
+  {
+    method: "DELETE",
+    path: "/products/:id",
+    handler: (request, response) => {
+      return response.end("Item removido com sucesso!");
+    }
   }
-];
+].map((route) => ({
+  ...route,
+  path: parseRoutePath(route.path)
+}));
 
 export { routes };

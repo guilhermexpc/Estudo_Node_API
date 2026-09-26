@@ -6,10 +6,16 @@ async function jsonBodyHandler(request, response) {
     buffer.push(chunk);
   }
 
-  try {
-    request.body = JSON.parse(Buffer.concat(buffer).toString());
-  } catch (error) {
-    console.log("Error", error);
+  const body = Buffer.concat(buffer).toString().trim();
+
+  if (body) {
+    try {
+      request.body = JSON.parse(body);
+    } catch (error) {
+      console.log("Error", error);
+      request.body = null;
+    }
+  } else {
     request.body = null;
   }
 
